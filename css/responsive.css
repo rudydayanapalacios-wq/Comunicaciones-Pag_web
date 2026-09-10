@@ -1,0 +1,26 @@
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .nav-links {
+        margin-top: 0.8rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero h1 {
+        font-size: 2.6rem;
+    }
+
+    .section {
+        padding: 5.5rem 1.2rem 3rem;
+    }
+
+    /* Reducción suave de efectos 3D en pantallas pequeñas para fluidez */
+    .hierarchy-card:hover, .card:hover, .feature-box:hover {
+        transform: translateY(-5px) scale(1.01);
+    }
+}
