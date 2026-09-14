@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicación No Verbal | Presentación Interactiva</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/noverbal-custom.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="slides-body">
+
+    <nav class="navbar floating-nav">
+        <a href="index.html" class="logo">Comunicación.</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="tipos-comunicacion.html">Tipos</a></li>
+            <li><a href="funciones-lenguaje.html">Funciones</a></li>
+            <li><a href="comunicacion-no-verbal.html" class="active">No Verbal</a></li>
+            <li><a href="autor.html">Autor</a></li>
+        </ul>
+    </nav>
+
+    <!-- BARRA DE PROGRESO DE DIAPOSITIVAS -->
+    <div class="slide-progress-container">
+        <div class="slide-progress-bar" id="progressBar"></div>
+    </div>
+
+    <main class="slides-deck">
+
+        <!-- SLIDE 0: INTRODUCCIÓN -->
+        <section class="slide active-slide" data-slide="0">
+            <div class="slide-content intro-content">
+                <span class="badge glow-badge">Módulo Interactivo</span>
+                <h1 class="hero-title">Comunicación No Verbal</h1>
+                <p class="hero-subtitle">Descubre el 65% del mensaje que transmitimos en silencio a través de 9 dimensiones clave.</p>
+                <button class="slide-start-btn" onclick="goToSlide(1)">Iniciar Presentación ➔</button>
+            </div>
+        </section>
+
+        <!-- SLIDE 1: KINESIS -->
+        <section class="slide" data-slide="1">
+            <div class="slide-content split-slide">
+                <div class="slide-text">
+                    <span class="slide-number">01 / 09</span>
+                    <h2>🕺 Kinésica (Kinesis)</h2>
+                    <p class="slide-desc">Estudia los movimientos corporales, la postura, las miradas y la gestualidad como canal de expresión.</p>
+                    <div class="interactive-chip-card">
+                        <h4>💡 Dato Clave</h4>
+                        <p>La inclinación del torso hacia adelante indica interés; la postura cruzada suele transmitir barrera o protección.</p>
+                    </div>
+                </div>
+                <div class="slide-visual">
+                    <div class="glass-visual-card">
+                        <img src="assets/img/kinesis_2.jpg" alt="Kinésica">
+                        <span class="floating-tag">Postura & Gesto</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: MICROEXPRESIONES -->
+        <section class="slide" data-slide="2">
+            <div class="slide-content split-slide">
+                <div class="slide-text">
+                    <span class="slide-number">02 / 09</span>
+                    <h2>⚡ Microexpresiones</h2>
+                    <p class="slide-desc">Movimientos faciales ultrarrápidos (fracciones de segundo) e involuntarios que exponen emociones auténticas.</p>
+                    <div class="interactive-chip-card">
+                        <h4>🔍 Investigador Clave</h4>
+                        <p>Paul Ekman categorizó las 7 emociones universales detectables en el rostro.</p>
+                    </div>
+                </div>
+                <div class="slide-visual">
+                    <div class="glass-visual-card">
+                        <img src="assets/img/micro.jpg" alt="Microexpresiones">
+                        <span class="floating-tag">Emoción Involuntaria</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: PROXEMIA -->
+        <section class="slide" data-slide="3">
+            <div class="slide-content split-slide">
+                <div class="slide-text">
+                    <span class="slide-number">03 / 09</span>
+                    <h2>📐 Proxemia</h2>
+                    <p class="slide-desc">Análisis del empleo del espacio personal e interpersonal durante la interacción.</p>
+                    <div class="zones-mini-grid">
+                        <div class="zone-pill"><strong>Íntima:</strong> 0 - 45 cm</div>
+                        <div class="zone-pill"><strong>Personal:</strong> 45 cm - 1.2 m</div>
+                        <div class="zone-pill"><strong>Social:</strong> 1.2 m - 3.6 m</div>
+                        <div class="zone-pill"><strong>Pública:</strong> > 3.6 m</div>
+                    </div>
+                </div>
+                <div class="slide-visual">
+                    <div class="glass-visual-card">
+                        <img src="assets/img/proxemia.jpg" alt="Proxemia">
+                        <span class="floating-tag">Espacio Personal</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: PARALENGUAJE -->
+        <section class="slide" data-slide="4">
+            <div class="slide-content split-slide">
+                <div class="slide-text">
+                    <span class="slide-number">04 / 09</span>
+                    <h2>🎙️ Paralenguaje</h2>
+                    <p class="slide-desc">Atributos vocales no verbales que acompañan al discurso oral.</p>
+                    <ul class="feature-bullets">
+                        <li><strong>Tono:</strong> Agudo o grave.</li>
+                        <li><strong>Ritmo:</strong> Pausado o acelerado.</li>
+                        <li><strong>Volumen:</strong> Modulación e intensidad.</li>
+                        <li><strong>Pausas:</strong> Silencios expresivos.</li>
+                    </ul>
+                </div>
+                <div class="slide-visual">
+                    <div class="glass-visual-card">
+                        <img src="assets/img/para.jpg" alt="Paralenguaje">
+                        <span class="floating-tag">Voz & Ritmo</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: EMBLEMAS -->
+        <section class="slide" data-slide="5">
+            <div class="slide-content split-slide">
+                <div class="slide-text">
+                    <span class="slide-number">05 / 09</span>
+                    <h2>👌 Emblemas</h2>
+                    <p class="slide-desc">Gestos intencionales con equivalencia verbal directa y acordada culturalmente.</p>
+                    <div class="interactive-chip-card">
+                        <h4>📌 Ejemplo</h4>
+                        <p>Levantar el pulgar representa "Aprobación/OK" sin necesidad de hablar.</p>
+                    </div>
+                </div>
+                <div class="slide-visual">
+                    <div class="glass-visual-card">
+                        <img src="assets/img/emblema.jpg" alt="Emblemas">
+                        <span class="floating-tag">Traducción Directa</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: ADEMANES -->
+        <section class="slide" data-slide="6">
+            <div class="slide-content split-slide">
+                <div class="slide-text">
+                    <span class="slide-number">06 / 09</span>
+                    <h2>👋 Ademanes</h2>
+                    <p class="slide-desc">Movimientos de brazos y manos que enfatizan, ilustran o matizan las palabras.</p>
+                    <div class="interactive-chip-card">
+                        <h4>💡 Impacto</h4>
+                        <p>Aumentan la retención de la audiencia y transmiten dinamismo al comunicar.</p>
+                    </div>
+                </div>
+                <div class="slide-visual">
+                    <div class="glass-visual-card">
+                        <img src="assets/img/etiqueta.jpg" alt="Ademanes">
+                        <span class="floating-tag">Énfasis Corporal</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: PROTOCOLO -->
+        <section class="slide" data-slide="7">
+            <div class="slide-content split-slide">
+                <div class="slide-text">
+                    <span class="slide-number">07 / 09</span>
+                    <h2>📜 Protocolo</h2>
+                    <p class="slide-desc">Reglas de etiqueta y pautas de comportamiento formal que estructuran la interacción.</p>
+                    <div class="interactive-chip-card">
+                        <h4>💼 Aplicación</h4>
+                        <p>Precedencia en eventos, puntualidad y postura institucional.</p>
+                    </div>
+                </div>
+                <div class="slide-visual">
+                    <div class="glass-visual-card">
+                        <img src="assets/img/fondo.jpg" alt="Protocolo">
+                        <span class="floating-tag">Norma Formal</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: SALUDO -->
+        <section class="slide" data-slide="8">
+            <div class="slide-content split-slide">
+                <div class="slide-text">
+                    <span class="slide-number">08 / 09</span>
+                    <h2>🤝 El Saludo</h2>
+                    <p class="slide-desc">Ritual inicial de contacto que establece jerarquía, cercanía y respeto mutuo.</p>
+                    <div class="interactive-chip-card">
+                        <h4>⚙️ Calibración</h4>
+                        <p>Un apretón firme y contacto visual de 2 segundos generan confianza inmediata.</p>
+                    </div>
+                </div>
+                <div class="slide-visual">
+                    <div class="glass-visual-card">
+                        <img src="assets/img/fondo.jpg" alt="Saludo">
+                        <span class="floating-tag">Primer Contacto</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: VESTIMENTA -->
+        <section class="slide" data-slide="9">
+            <div class="slide-content split-slide">
+                <div class="slide-text">
+                    <span class="slide-number">09 / 09</span>
+                    <h2>👔 Vestimenta y Aspecto</h2>
+                    <p class="slide-desc">Lanza un mensaje visual inmediato sobre profesionalismo, estilo y contexto.</p>
+                    <div class="interactive-chip-card">
+                        <h4>⏱️ Regla de los 7 Segundos</h4>
+                        <p>El cerebro juzga credibilidad y estatus antes del primer saludo verbal.</p>
+                    </div>
+                </div>
+                <div class="slide-visual">
+                    <div class="glass-visual-card">
+                        <img src="assets/img/fondo.jpg" alt="Vestimenta">
+                        <span class="floating-tag">Imagen Visual</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: DESAFÍO INTERACTIVO -->
+        <section class="slide" data-slide="10">
+            <div class="slide-content full-slide">
+                <h2 class="section-title">🕹️ Desafío: Decodificador No Verbal</h2>
+                
+                <div class="game-card slide-game-card">
+                    <div class="game-header">
+                        <div class="game-score-badge">Escenario <span id="currentLevel">1</span> de 3 | Puntos: <span id="score">0</span></div>
+                    </div>
+
+                    <div class="game-body">
+                        <div class="quiz-question" id="scenarioText">Cargando escenario...</div>
+                        <div class="options-grid" id="optionsContainer"></div>
+                        <div id="gameFeedback" class="feedback-msg"></div>
+                        <div class="game-actions">
+                            <button id="nextBtn" class="slide-btn hidden-btn" onclick="nextQuestion()">Siguiente Escenario ➔</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CONTROLES FLOTANTES -->
+    <div class="slides-controls">
+        <button class="nav-arrow" id="prevSlideBtn" onclick="prevSlide()">❮</button>
+        <span class="slide-indicator" id="slideIndicator">0 / 10</span>
+        <button class="nav-arrow" id="nextSlideBtn" onclick="nextSlide()">❯</button>
+    </div>
+
+    <script src="js/noverbal.js"></script>
+</body>
+</html>
