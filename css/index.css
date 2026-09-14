@@ -1,6 +1,6 @@
 /* Paleta Glassmorphism basada en la imagen: Fondo Mesh + Cristal Esmerilado */
 :root {
-    /* Colores extraídos de la imagen */
+    /* Colores principales */
     --color-black: #08070c;           /* Negro profundo */
     --color-purple: #a855f7;          /* Morado aura */
     --color-blue-glow: #3b82f6;       /* Azul neón */
@@ -33,7 +33,6 @@
 }
 
 body {
-    /* Ruta actualizada hacia assets/img/ */
     background: url('../assets/img/fonde.jpg') no-repeat center center fixed;
     background-size: cover;
     background-color: var(--color-black);
@@ -43,8 +42,6 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
 }
-
-
 
 /* Capa de destello flotante sobre la imagen para añadir más iluminación */
 body::before {
@@ -148,6 +145,70 @@ main {
     margin: 0 auto;
     padding: 2rem;
     width: 100%;
+}
+
+/* ==========================================
+   ESTILOS PARA LAS TARJETAS (TOPICS GRID)
+   ========================================== */
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.topic-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2.2rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+    box-shadow: var(--shadow-glass);
+}
+
+.topic-card:hover {
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-hover);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-glow);
+}
+
+.topic-card h3 {
+    font-family: var(--font-heading);
+    color: var(--color-cream);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    text-shadow: 0 0 10px rgba(253, 232, 208, 0.3);
+}
+
+.topic-card p {
+    color: var(--color-cream-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.topic-btn {
+    color: var(--color-purple);
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.topic-card:hover .topic-btn {
+    color: var(--color-cream);
+    transform: translateX(6px);
+    text-shadow: 0 0 8px var(--color-purple);
 }
 
 footer {
