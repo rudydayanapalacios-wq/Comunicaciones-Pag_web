@@ -1,288 +1,203 @@
-/**
- * Control de Presentación Interactiva y Juego de Funciones del Lenguaje
- */
+// Desplegable de detalles para las tarjetas teóricas
+function toggleAccordion(id) {
+    const content = document.getElementById(id);
+    if (content) {
+        content.classList.toggle('open');
+    }
+}
 
+/* ===================================================
+   SISTEMA INTERACTIVO: EFECTO 3D TILT Y MOUSE TRACK GLOW
+=================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-    initYouTubeVideos();
-    initSlides();
-    initGame();
+    const cards = document.querySelectorAll('.tilt-card');
+
+    cards.forEach(card => {
+        const glow = card.querySelector('.card-glow');
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Posicionamiento del brillo
+            if (glow) {
+                glow.style.left = `${x}px`;
+                glow.style.top = `${y}px`;
+            }
+
+            // Calculo de inclinación 3D (Tilt)
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -8; // Ángulo X
+            const rotateY = ((x - centerX) / centerX) * 8;  // Ángulo Y
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        });
+    });
+
+    initClassifierGame();
 });
 
-// ==========================================
-// 1. CONVERTIDOR DE URLS Y CONTROL DE YOUTUBE
-// ==========================================
-function parseYouTubeUrl(url) {
-    if (!url) return '';
-    let videoId = '';
-    
-    // Extraer videoId respetando parámetros
-    if (url.includes('youtube.com/watch?v=')) {
-        videoId = url.split('v=')[1].split('&')[0];
-    } else if (url.includes('youtu.be/')) {
-        videoId = url.split('youtu.be/')[1].split('?')[0];
-    } else if (url.includes('youtube.com/embed/')) {
-        videoId = url.split('embed/')[1].split('?')[0];
-    }
-
-    if (videoId) {
-        // enablejsapi=1 para enviar comandos de pausa vía postMessage
-        return `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&enablejsapi=1`;
-    }
-    
-    return url;
-}
-
-function initYouTubeVideos() {
-    const iframes = document.querySelectorAll('iframe.yt-embed-video');
-    iframes.forEach(iframe => {
-        const rawUrl = iframe.getAttribute('data-yt-url');
-        if (rawUrl) {
-            iframe.src = parseYouTubeUrl(rawUrl);
-        }
-    });
-}
-
-/**
- * Pausa todos los videos activos al cambiar de diapositiva
- */
-function pauseAllVideos() {
-    const iframes = document.querySelectorAll('iframe.yt-embed-video');
-    iframes.forEach(iframe => {
-        if (iframe.contentWindow) {
-            iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-        }
-    });
-}
-
-// ==========================================
-// 2. SISTEMA DE DIAPOSITIVAS (SLIDES)
-// ==========================================
-let currentSlide = 0;
-let slides = [];
-let totalSlides = 0;
-
-function initSlides() {
-    slides = document.querySelectorAll('.slide');
-    if (slides.length === 0) return;
-    
-    totalSlides = slides.length - 1;
-    updateSlides();
-}
-
-function updateSlides() {
-    // Pausar cualquier video activo antes de cambiar de vista
-    pauseAllVideos();
-
-    slides.forEach((slide, idx) => {
-        if (idx === currentSlide) {
-            slide.classList.add('active-slide');
-            slide.style.display = 'flex';
-        } else {
-            slide.classList.remove('active-slide');
-            slide.style.display = 'none';
-        }
-    });
-
-    // Actualizar indicador (Ej. 1 / 8)
-    const indicator = document.getElementById('slideIndicator');
-    if (indicator) {
-        indicator.textContent = `${currentSlide} / ${totalSlides}`;
-    }
-
-    // Actualizar barra de progreso
-    const progressBar = document.getElementById('progressBar');
-    if (progressBar) {
-        const percentage = (currentSlide / totalSlides) * 100;
-        progressBar.style.width = `${percentage}%`;
+/* ===================================================
+   SISTEMA DE CARGA DE FOTO PARA JAKOBSON
+=================================================== */
+function handlePhotoUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const imgElement = document.getElementById('jakobsonPhoto');
+            if (imgElement) {
+                imgElement.src = e.target.result;
+            }
+        };
+        reader.readAsDataURL(file);
     }
 }
 
-function goToSlide(index) {
-    if (index >= 0 && index <= totalSlides) {
-        currentSlide = index;
-        updateSlides();
+/* ===================================================
+   SÍNTESIS DE VOZ PARA PROBAR AUDIOS EN TARJETAS
+=================================================== */
+function triggerAudioEffect(text) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Detener audios anteriores
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-ES';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert("Tu navegador no soporta síntesis de voz, pero la frase es: " + text);
     }
 }
 
-function nextSlide() {
-    if (currentSlide < totalSlides) {
-        currentSlide++;
-        updateSlides();
-    }
-}
-
-function prevSlide() {
-    if (currentSlide > 0) {
-        currentSlide--;
-        updateSlides();
-    }
-}
-
-// Navegación mediante teclado
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') nextSlide();
-    if (e.key === 'ArrowLeft') prevSlide();
-});
-
-// ==========================================
-// 3. JUEGO INTERACTIVO: DECODIFICADOR
-// ==========================================
-const gameData = [
+/* ===================================================
+   JUEGO: CLASIFICADOR DINÁMICO DE FUNCIONES
+=================================================== */
+const cardDataset = [
     {
-        question: '“¡Siento una felicidad inmensa al ver este resultado!”',
-        options: ['Referencial', 'Emotiva', 'Fática', 'Apelativa'],
-        correct: 1,
-        feedback: '¡Correcto! Expresa el estado emocional del emisor (Función Emotiva).'
+        phrase: "«Siento una profunda alegría al saber que logramos completar la meta juntos.»",
+        category: "emotiva",
+        explanation: "Expresa el estado emocional y subjetivo del emisor."
     },
     {
-        question: '“Por favor, cierren la puerta al salir.”',
-        options: ['Poética', 'Apelativa', 'Metalingüística', 'Fática'],
-        correct: 1,
-        feedback: '¡Excelente! Busca una reacción o conducta en el receptor (Función Apelativa).'
+        phrase: "«El último censo reportó una población de más de 8 millones de habitantes.»",
+        category: "referencial",
+        explanation: "Entrega información objetiva y verificable sobre la realidad."
     },
     {
-        question: '“¿Aló? ¿Me escuchas bien en la llamada?”',
-        options: ['Fática', 'Emotiva', 'Referencial', 'Metalingüística'],
-        correct: 0,
-        feedback: '¡Muy bien! Verifica que el canal de comunicación esté abierto (Función Fática).'
+        phrase: "«Apaguen sus dispositivos móviles antes de que inicie la función de teatro.»",
+        category: "apelativa",
+        explanation: "Busca modificar la conducta del receptor mediante una indicación."
     },
     {
-        question: '“La reunión comenzará formalmente a las 3:00 PM.”',
-        options: ['Apelativa', 'Poética', 'Referencial', 'Emotiva'],
-        correct: 2,
-        feedback: '¡Correcto! Entrega datos objetivos de la realidad (Función Referencial).'
+        phrase: "«¿Hola? ¿Siguen en la línea o se cortó la llamada?»",
+        category: "fatica",
+        explanation: "Evalúa el estado del canal de comunicación."
     },
     {
-        question: '“La palabra \'sintaxis\' se refiere al orden de las palabras.”',
-        options: ['Metalingüística', 'Fática', 'Poética', 'Referencial'],
-        correct: 0,
-        feedback: '¡Correcto! Utiliza el código para reflexionar sobre el idioma (Función Metalingüística).'
+        phrase: "«En el silencio de la noche, el mar le canta a la luna sus secretos.»",
+        category: "poetica",
+        explanation: "Usa recursos estilísticos para enriquecer la estética del mensaje."
+    },
+    {
+        phrase: "«Un verbo transitivo requiere un objeto directo para completar su sentido.»",
+        category: "metalinguistica",
+        explanation: "Aclara o reflexiona sobre las reglas del propio código o lenguaje."
     }
 ];
 
-let currentGameIndex = 0;
-let score = 0;
+let remainingDeck = [];
+let currentCard = null;
+let aciertos = 0;
 
-function initGame() {
-    const scenarioEl = document.getElementById('scenarioText');
-    if (!scenarioEl) return;
-    loadScenario();
+function initClassifierGame() {
+    remainingDeck = [...cardDataset].sort(() => Math.random() - 0.5);
+    aciertos = 0;
+    document.getElementById('score').textContent = aciertos;
+    document.getElementById('resetGameBtn').classList.add('hidden-btn');
+    enableCatButtons(true);
+    showNextCard();
 }
 
-function loadScenario() {
-    const scenario = gameData[currentGameIndex];
-    
-    const levelEl = document.getElementById('currentLevel');
-    const scoreEl = document.getElementById('score');
-    const scenarioTextEl = document.getElementById('scenarioText');
-    const feedbackEl = document.getElementById('gameFeedback');
-    const nextBtn = document.getElementById('nextBtn');
-    const container = document.getElementById('optionsContainer');
+function showNextCard() {
+    const feedback = document.getElementById('gameFeedback');
+    const cardsLeftSpan = document.getElementById('cardsLeft');
+    feedback.innerHTML = '';
 
-    if (levelEl) levelEl.textContent = currentGameIndex + 1;
-    if (scoreEl) scoreEl.textContent = score;
-    if (scenarioTextEl) scenarioTextEl.textContent = scenario.question;
-    if (feedbackEl) feedbackEl.textContent = '';
-    if (nextBtn) nextBtn.classList.add('hidden-btn');
+    cardsLeftSpan.textContent = remainingDeck.length;
 
-    if (container) {
-        container.innerHTML = '';
-        scenario.options.forEach((optionText, idx) => {
-            const btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.textContent = optionText;
-            btn.onclick = () => selectOption(idx);
-            container.appendChild(btn);
-        });
+    if (remainingDeck.length === 0) {
+        finishClassifierGame();
+        return;
     }
+
+    currentCard = remainingDeck.pop();
+    document.getElementById('cardPhraseText').textContent = currentCard.phrase;
+    cardsLeftSpan.textContent = remainingDeck.length + 1;
 }
 
-function selectOption(selectedIndex) {
-    const scenario = gameData[currentGameIndex];
-    const buttons = document.querySelectorAll('#optionsContainer .option-btn');
-    const feedbackEl = document.getElementById('gameFeedback');
-    const nextBtn = document.getElementById('nextBtn');
+function classifyCard(selectedCategory) {
+    if (!currentCard) return;
 
-    buttons.forEach((btn, idx) => {
-        btn.disabled = true;
-        if (idx === scenario.correct) {
-            btn.classList.add('correct');
-        } else if (idx === selectedIndex) {
-            btn.classList.add('incorrect');
-        }
-    });
+    const feedback = document.getElementById('gameFeedback');
+    const scoreSpan = document.getElementById('score');
 
-    if (selectedIndex === scenario.correct) {
-        score += 10;
-        const scoreEl = document.getElementById('score');
-        if (scoreEl) scoreEl.textContent = score;
-        if (feedbackEl) {
-            feedbackEl.className = 'feedback-msg feedback-success';
-            feedbackEl.textContent = scenario.feedback;
-        }
+    if (selectedCategory === currentCard.category) {
+        aciertos++;
+        scoreSpan.textContent = aciertos;
+        feedback.style.color = '#86efac';
+        feedback.innerHTML = `✨ ¡Correcto! ${currentCard.explanation}`;
     } else {
-        if (feedbackEl) {
-            feedbackEl.className = 'feedback-msg feedback-error';
-            feedbackEl.textContent = 'Incorrecto. Observa sobre qué elemento de la comunicación recae la intención.';
-        }
+        feedback.style.color = '#fca5a5';
+        feedback.innerHTML = `❌ Incorrecto. La categoría correcta era <strong>${getCategoryName(currentCard.category)}</strong>: ${currentCard.explanation}`;
     }
 
-    if (nextBtn) {
-        nextBtn.classList.remove('hidden-btn');
-    }
+    enableCatButtons(false);
+    setTimeout(() => {
+        enableCatButtons(true);
+        showNextCard();
+    }, 2200);
 }
 
-function nextQuestion() {
-    currentGameIndex++;
-    if (currentGameIndex < gameData.length) {
-        loadScenario();
-    } else {
-        const scenarioTextEl = document.getElementById('scenarioText');
-        const container = document.getElementById('optionsContainer');
-        const feedbackEl = document.getElementById('gameFeedback');
-        const nextBtn = document.getElementById('nextBtn');
-
-        const totalQuestions = gameData.length;
-        const maxScore = totalQuestions * 10;
-        const passingScore = maxScore * 0.6; // Mínimo 60% para aprobar (3 de 5)
-
-        if (scenarioTextEl) {
-            scenarioTextEl.textContent = `🎯 Puntuación Final: ${score} / ${maxScore} pts.`;
-        }
-
-        if (container) container.innerHTML = '';
-
-        if (feedbackEl) {
-            if (score >= passingScore) {
-                feedbackEl.className = 'feedback-msg feedback-success';
-                feedbackEl.textContent = '🎉 ¡Excelente trabajo! Dominas las funciones del lenguaje de Roman Jakobson.';
-            } else if (score > 0) {
-                feedbackEl.className = 'feedback-msg feedback-error';
-                feedbackEl.textContent = '💡 Has completado el test, pero necesitas repasar los conceptos. ¡Inténtalo de nuevo!';
-            } else {
-                feedbackEl.className = 'feedback-msg feedback-error';
-                feedbackEl.textContent = '⚠️ Has fallado todas las preguntas. Te sugerimos revisar el material antes de reintentar.';
-            }
-        }
-
-        if (nextBtn) {
-            nextBtn.textContent = '🔄 Reintentar Desafío';
-            nextBtn.onclick = resetGame;
-            nextBtn.classList.remove('hidden-btn');
-            nextBtn.style.display = 'inline-block';
-        }
-    }
+function getCategoryName(cat) {
+    const names = {
+        'emotiva': 'Emotiva',
+        'referencial': 'Referencial',
+        'apelativa': 'Apelativa',
+        'fatica': 'Fática',
+        'poetica': 'Poética',
+        'metalinguistica': 'Metalingüística'
+    };
+    return names[cat] || cat;
 }
 
-function resetGame() {
-    currentGameIndex = 0;
-    score = 0;
-    
-    const nextBtn = document.getElementById('nextBtn');
-    if (nextBtn) {
-        nextBtn.textContent = 'Siguiente →';
-        nextBtn.onclick = nextQuestion;
-    }
-    
-    loadScenario();
+function enableCatButtons(enable) {
+    const buttons = document.querySelectorAll('.cat-btn');
+    buttons.forEach(btn => btn.disabled = !enable);
+}
+
+function finishClassifierGame() {
+    const activeCard = document.getElementById('activeCard');
+    const feedback = document.getElementById('gameFeedback');
+    const resetBtn = document.getElementById('resetGameBtn');
+    const cardsLeftSpan = document.getElementById('cardsLeft');
+
+    cardsLeftSpan.textContent = 0;
+    activeCard.style.borderColor = 'rgba(253, 232, 208, 0.4)';
+    document.getElementById('cardPhraseText').textContent = '🎉 ¡Has clasificado todas las tarjetas!';
+
+    feedback.style.color = 'var(--color-cream)';
+    feedback.innerHTML = `Puntuación final: <strong>${aciertos} de ${cardDataset.length} aciertos</strong>.`;
+
+    enableCatButtons(false);
+    resetBtn.classList.remove('hidden-btn');
+}
+
+function resetClassifierGame() {
+    initClassifierGame();
 }
