@@ -1,203 +1,126 @@
-// Desplegable de detalles para las tarjetas teóricas
-function toggleAccordion(id) {
-    const content = document.getElementById(id);
-    if (content) {
-        content.classList.toggle('open');
-    }
-}
+/**
+ * LÓGICA DINÁMICA DE COMUNICACIÓN NO VERBAL
+ */
 
-/* ===================================================
-   SISTEMA INTERACTIVO: EFECTO 3D TILT Y MOUSE TRACK GLOW
-=================================================== */
-document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.tilt-card');
-
-    cards.forEach(card => {
-        const glow = card.querySelector('.card-glow');
-
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            // Posicionamiento del brillo
-            if (glow) {
-                glow.style.left = `${x}px`;
-                glow.style.top = `${y}px`;
-            }
-
-            // Calculo de inclinación 3D (Tilt)
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -8; // Ángulo X
-            const rotateY = ((x - centerX) / centerX) * 8;  // Ángulo Y
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-        });
-    });
-
-    initClassifierGame();
-});
-
-/* ===================================================
-   SISTEMA DE CARGA DE FOTO PARA JAKOBSON
-=================================================== */
-function handlePhotoUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const imgElement = document.getElementById('jakobsonPhoto');
-            if (imgElement) {
-                imgElement.src = e.target.result;
-            }
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
-/* ===================================================
-   SÍNTESIS DE VOZ PARA PROBAR AUDIOS EN TARJETAS
-=================================================== */
-function triggerAudioEffect(text) {
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); // Detener audios anteriores
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'es-ES';
-        utterance.rate = 0.95;
-        window.speechSynthesis.speak(utterance);
-    } else {
-        alert("Tu navegador no soporta síntesis de voz, pero la frase es: " + text);
-    }
-}
-
-/* ===================================================
-   JUEGO: CLASIFICADOR DINÁMICO DE FUNCIONES
-=================================================== */
-const cardDataset = [
+// Banco de Escenarios para el Simulador
+const quizScenarios = [
     {
-        phrase: "«Siento una profunda alegría al saber que logramos completar la meta juntos.»",
-        category: "emotiva",
-        explanation: "Expresa el estado emocional y subjetivo del emisor."
+        question: "Durante una junta corporativa, un ejecutivo cruza los brazos, inclina el torso hacia atrás y evita el contacto visual. ¿Qué canal kinesiológico predomina?",
+        options: ["Postura defensiva/bloqueo", "Sintonía o rapport", "Postura erguida de poder", "Orientación de apertura"],
+        correct: 0,
+        explanation: "La inclinación hacia atrás y los brazos cruzados denotan una actitud de reserva o desaprobación según el análisis kinesiológico."
     },
     {
-        phrase: "«El último censo reportó una población de más de 8 millones de habitantes.»",
-        category: "referencial",
-        explanation: "Entrega información objetiva y verificable sobre la realidad."
+        question: "En una entrevista de trabajo, el candidato responde serenamente, pero por 1/20 de segundo frunce el entrecejo al mencionar a su jefe anterior. ¿A qué corresponde?",
+        options: ["Ademán ilustrador", "Microexpresión involuntaria", "Emblema cultural", "Paralenguaje de vacilación"],
+        correct: 1,
+        explanation: "Las microexpresiones duran una fracción de segundo y filtran la emoción genuina antes de que pueda ser enmascarada."
     },
     {
-        phrase: "«Apaguen sus dispositivos móviles antes de que inicie la función de teatro.»",
-        category: "apelativa",
-        explanation: "Busca modificar la conducta del receptor mediante una indicación."
+        question: "Un conferencista eleva bruscamente el volumen y ralentiza las palabras al pronunciar la conclusión de su discurso. ¿Qué canal está utilizando?",
+        options: ["Proxemia social", "Paralenguaje de énfasis", "Kinesis de transición", "Protocolo formal"],
+        correct: 1,
+        explanation: "El volumen, el ritmo y la velocidad pertenecen al paralenguaje e influyen en cómo se percibe la importancia del mensaje."
     },
     {
-        phrase: "«¿Hola? ¿Siguen en la línea o se cortó la llamada?»",
-        category: "fatica",
-        explanation: "Evalúa el estado del canal de comunicación."
-    },
-    {
-        phrase: "«En el silencio de la noche, el mar le canta a la luna sus secretos.»",
-        category: "poetica",
-        explanation: "Usa recursos estilísticos para enriquecer la estética del mensaje."
-    },
-    {
-        phrase: "«Un verbo transitivo requiere un objeto directo para completar su sentido.»",
-        category: "metalinguistica",
-        explanation: "Aclara o reflexiona sobre las reglas del propio código o lenguaje."
+        question: "Un expositor hace una señal circular cerrada con el pulgar e índice levantados para indicar 'excelente'. ¿Qué tipo de gesto utilizó?",
+        options: ["Ademán ilustrativo", "Emblema", "Gesto de adaptación", "Kinesis involuntaria"],
+        correct: 1,
+        explanation: "Los emblemas son gestos con una traducción verbal implícita y directa aceptada culturalmente."
     }
 ];
 
-let remainingDeck = [];
-let currentCard = null;
-let aciertos = 0;
+let currentStep = 0;
+let userScore = 0;
+let currentStreak = 0;
 
-function initClassifierGame() {
-    remainingDeck = [...cardDataset].sort(() => Math.random() - 0.5);
-    aciertos = 0;
-    document.getElementById('score').textContent = aciertos;
-    document.getElementById('resetGameBtn').classList.add('hidden-btn');
-    enableCatButtons(true);
-    showNextCard();
+document.addEventListener("DOMContentLoaded", () => {
+    initLabAnimations();
+    initQuizEngine();
+});
+
+/* Transición fluida al cambiar de pestaña en el Laboratorio */
+function initLabAnimations() {
+    const display = document.querySelector('.lab-display');
+    const tabButtons = document.querySelectorAll('.tab-btn');
+
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (display) {
+                display.style.opacity = '0';
+                display.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    display.style.transition = 'all 0.4s ease';
+                    display.style.opacity = '1';
+                    display.style.transform = 'translateY(0)';
+                }, 150);
+            }
+        });
+    });
 }
 
-function showNextCard() {
-    const feedback = document.getElementById('gameFeedback');
-    const cardsLeftSpan = document.getElementById('cardsLeft');
-    feedback.innerHTML = '';
+/* Lógica del Simulador */
+function initQuizEngine() {
+    renderScenario();
 
-    cardsLeftSpan.textContent = remainingDeck.length;
-
-    if (remainingDeck.length === 0) {
-        finishClassifierGame();
-        return;
+    const btnNext = document.getElementById("btn-next-question");
+    if (btnNext) {
+        btnNext.addEventListener("click", () => {
+            currentStep = (currentStep + 1) % quizScenarios.length;
+            renderScenario();
+        });
     }
-
-    currentCard = remainingDeck.pop();
-    document.getElementById('cardPhraseText').textContent = currentCard.phrase;
-    cardsLeftSpan.textContent = remainingDeck.length + 1;
 }
 
-function classifyCard(selectedCategory) {
-    if (!currentCard) return;
+function renderScenario() {
+    const qData = quizScenarios[currentStep];
+    const questionEl = document.getElementById("quiz-question");
+    const optionsGrid = document.getElementById("quiz-options");
+    const feedbackEl = document.getElementById("quiz-feedback");
+    const btnNext = document.getElementById("btn-next-question");
 
-    const feedback = document.getElementById('gameFeedback');
-    const scoreSpan = document.getElementById('score');
+    if (!questionEl || !optionsGrid) return;
 
-    if (selectedCategory === currentCard.category) {
-        aciertos++;
-        scoreSpan.textContent = aciertos;
-        feedback.style.color = '#86efac';
-        feedback.innerHTML = `✨ ¡Correcto! ${currentCard.explanation}`;
+    questionEl.innerText = `[Caso ${currentStep + 1}/${quizScenarios.length}] ${qData.question}`;
+    optionsGrid.innerHTML = "";
+    feedbackEl.className = "quiz-feedback hidden";
+    btnNext.classList.add("hidden");
+
+    qData.options.forEach((optText, index) => {
+        const button = document.createElement("button");
+        button.className = "option-btn";
+        button.innerText = optText;
+        button.onclick = () => handleAnswer(index, qData.correct, qData.explanation);
+        optionsGrid.appendChild(button);
+    });
+}
+
+function handleAnswer(selectedIndex, correctIndex, explanation) {
+    const buttons = document.querySelectorAll(".option-btn");
+    const feedbackEl = document.getElementById("quiz-feedback");
+    const btnNext = document.getElementById("btn-next-question");
+    const scoreVal = document.getElementById("score-val");
+    const streakVal = document.getElementById("streak-val");
+
+    buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) btn.classList.add("correct");
+        if (idx === selectedIndex && selectedIndex !== correctIndex) btn.classList.add("wrong");
+    });
+
+    if (selectedIndex === correctIndex) {
+        userScore += 100;
+        currentStreak++;
+        feedbackEl.innerText = `¡Correcto! ${explanation}`;
+        feedbackEl.className = "quiz-feedback correct-bg";
     } else {
-        feedback.style.color = '#fca5a5';
-        feedback.innerHTML = `❌ Incorrecto. La categoría correcta era <strong>${getCategoryName(currentCard.category)}</strong>: ${currentCard.explanation}`;
+        currentStreak = 0;
+        feedbackEl.innerText = `Incorrecto. ${explanation}`;
+        feedbackEl.className = "quiz-feedback wrong-bg";
     }
 
-    enableCatButtons(false);
-    setTimeout(() => {
-        enableCatButtons(true);
-        showNextCard();
-    }, 2200);
-}
+    if (scoreVal) scoreVal.innerText = `Puntaje: ${userScore}`;
+    if (streakVal) streakVal.innerText = `Racha: ${currentStreak} 🔥`;
 
-function getCategoryName(cat) {
-    const names = {
-        'emotiva': 'Emotiva',
-        'referencial': 'Referencial',
-        'apelativa': 'Apelativa',
-        'fatica': 'Fática',
-        'poetica': 'Poética',
-        'metalinguistica': 'Metalingüística'
-    };
-    return names[cat] || cat;
-}
-
-function enableCatButtons(enable) {
-    const buttons = document.querySelectorAll('.cat-btn');
-    buttons.forEach(btn => btn.disabled = !enable);
-}
-
-function finishClassifierGame() {
-    const activeCard = document.getElementById('activeCard');
-    const feedback = document.getElementById('gameFeedback');
-    const resetBtn = document.getElementById('resetGameBtn');
-    const cardsLeftSpan = document.getElementById('cardsLeft');
-
-    cardsLeftSpan.textContent = 0;
-    activeCard.style.borderColor = 'rgba(253, 232, 208, 0.4)';
-    document.getElementById('cardPhraseText').textContent = '🎉 ¡Has clasificado todas las tarjetas!';
-
-    feedback.style.color = 'var(--color-cream)';
-    feedback.innerHTML = `Puntuación final: <strong>${aciertos} de ${cardDataset.length} aciertos</strong>.`;
-
-    enableCatButtons(false);
-    resetBtn.classList.remove('hidden-btn');
-}
-
-function resetClassifierGame() {
-    initClassifierGame();
+    btnNext.classList.remove("hidden");
 }

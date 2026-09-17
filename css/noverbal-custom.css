@@ -1,463 +1,357 @@
-/* css/noverbal-custom.css */
+/* ==========================================================================
+   ESTILOS GLASSMORPHISM MESH & NEÓN (Basados en la paleta proporcionada)
+   ========================================================================== */
 
-body.slides-body {
-    background: #06050a;
+/* Integración de variables exactas */
+:root {
+    --color-black: #08070c;
+    --color-purple: #a855f7;
+    --color-blue-glow: #3b82f6;
+    --color-cream: #fde8d0;
+    --color-cream-muted: #d1bfae;
+
+    --glass-bg: rgba(18, 16, 26, 0.45);
+    --glass-bg-hover: rgba(45, 27, 78, 0.55);
+    --glass-border: rgba(253, 232, 208, 0.25);
+    --glass-border-hover: rgba(253, 232, 208, 0.6);
+
+    --shadow-glass: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.15);
+    --shadow-glow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(253, 232, 208, 0.35), 0 0 15px rgba(168, 85, 247, 0.5);
+
+    --font-heading: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tipografía de encabezados */
+.page-title, .lab-title-area h2, .section-heading h2, .quiz-header h2, .lab-display h3 {
+    font-family: var(--font-heading) !important;
+    font-style: italic;
     color: var(--color-cream);
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw;
-    margin: 0;
-    font-family: var(--font-body);
+    text-shadow: 0 0 20px rgba(253, 232, 208, 0.4), 0 0 40px rgba(168, 85, 247, 0.4);
 }
 
-.floating-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    background: rgba(8, 7, 14, 0.75);
-    backdrop-filter: blur(15px);
+.gradient-text {
+    color: var(--color-purple);
+    text-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
 }
 
-/* BARRA DE PROGRESO DE DIAPOSITIVAS */
-.slide-progress-container {
-    position: fixed;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    z-index: 99;
-}
-
-.slide-progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #a855f7, #ec4899);
-    transition: width 0.4s ease;
-}
-
-/* DECK DE SLIDES CON TRANSICIONES DE ESCALA Y OPACIDAD */
-.slides-deck {
-    position: relative;
-    width: 100vw;
-    height: calc(100vh - 74px);
-    margin-top: 74px;
-}
-
-.slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(0.94) translateY(30px);
-    transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 4rem;
-    box-sizing: border-box;
-    background: linear-gradient(180deg, rgba(8, 7, 14, 0.85) 0%, rgba(5, 4, 9, 0.95) 100%), 
-                url('../assets/img/fondo.jpg') center/cover no-repeat;
-}
-
-.slide.active-slide {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1) translateY(0);
-}
-
-.slide-content {
-    width: 100%;
-    max-width: 1100px;
-}
-
-/* VISTA DIVIDIDA SLIDE */
-.split-slide {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 3rem;
-    align-items: center;
-}
-
-.slide-number {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--color-purple-glow);
+.section-tag {
+    color: var(--color-purple);
     letter-spacing: 2px;
-}
-
-.slide-text h2 {
-    font-family: var(--font-heading);
-    font-size: 2.8rem;
-    margin: 0.4rem 0 1rem 0;
-    color: var(--color-cream);
-    text-shadow: 0 0 20px rgba(253, 232, 208, 0.2);
-}
-
-.slide-desc {
-    font-size: 1.15rem;
-    color: var(--color-cream-muted);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-}
-
-.interactive-chip-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(253, 232, 208, 0.18);
-    border-left: 4px solid var(--color-purple-glow);
-    border-radius: 12px;
-    padding: 1rem 1.4rem;
-    backdrop-filter: blur(10px);
-}
-
-.interactive-chip-card h4 {
-    margin: 0 0 0.3rem 0;
-    color: var(--color-cream);
-}
-
-.interactive-chip-card p {
-    margin: 0;
-    color: var(--color-cream-muted);
-    font-size: 0.95rem;
-}
-
-.feature-bullets {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.feature-bullets li {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(253, 232, 208, 0.15);
-    padding: 0.7rem 1rem;
-    border-radius: 10px;
-    margin-bottom: 0.6rem;
-}
-
-.zones-mini-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-}
-
-.zone-pill {
-    background: rgba(168, 85, 247, 0.15);
-    border: 1px solid rgba(168, 85, 247, 0.3);
-    padding: 0.8rem;
-    border-radius: 10px;
-    font-size: 0.9rem;
-}
-
-/* TARJETA VISUAL DE CRISTAL */
-.glass-visual-card {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(253, 232, 208, 0.3);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(168, 85, 247, 0.3);
-    height: 380px;
-}
-
-.glass-visual-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-.glass-visual-card:hover img {
-    transform: scale(1.05);
-}
-
-.floating-tag {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(18, 16, 26, 0.85);
-    backdrop-filter: blur(8px);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    border: 1px solid rgba(253, 232, 208, 0.3);
+    font-weight: 700;
     font-size: 0.85rem;
 }
 
-/* CONTROLES FLOTANTES DE NAVEGACIÓN */
-.slides-controls {
-    position: fixed;
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    background: rgba(18, 16, 26, 0.85);
-    border: 1px solid rgba(253, 232, 208, 0.25);
-    backdrop-filter: blur(15px);
-    padding: 0.6rem 1.4rem;
-    border-radius: 30px;
-    z-index: 100;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-}
-
-.nav-arrow {
-    background: none;
-    border: none;
-    color: var(--color-cream);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.nav-arrow:hover {
-    color: var(--color-purple-glow);
-    transform: scale(1.2);
-}
-
-.slide-indicator {
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
-
-.slide-start-btn, .slide-btn {
-    background: linear-gradient(135deg, #a855f7, #7c3aed);
-    border: none;
-    color: #fff;
-    padding: 0.9rem 2rem;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 20px rgba(168, 85, 247, 0.4);
-}
-
-.slide-start-btn:hover, .slide-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.6);
-}
-
-/* ESTILOS DEL JUEGO EN SLIDE FINAL */
-.slide-game-card {
-    background: rgba(18, 16, 26, 0.55);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(253, 232, 208, 0.2);
-    border-radius: 20px;
+/* Base de contenedores */
+.main-container {
+    max-width: 1100px;
+    margin: 0 auto;
     padding: 2rem;
 }
 
-.options-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-}
-
-.game-btn {
-    background: rgba(8, 7, 12, 0.8);
-    border: 1px solid rgba(253, 232, 208, 0.2);
-    color: var(--color-cream);
-    padding: 1rem;
-    border-radius: 12px;
-    cursor: pointer;
-    text-align: left;
-    transition: all 0.2s ease;
-}
-
-.game-btn:hover:not(:disabled) {
-    background: rgba(168, 85, 247, 0.25);
-    border-color: var(--color-purple-glow);
-}
-
-.game-btn.correct { background: rgba(34, 197, 94, 0.3) !important; border-color: #4ade80 !important; }
-.game-btn.incorrect { background: rgba(239, 68, 68, 0.3) !important; border-color: #f87171 !important; }
-
-@media (max-width: 900px) {
-    .split-slide { grid-template-columns: 1fr; gap: 1.5rem; }
-    .glass-visual-card { height: 220px; }
-    .slide-text h2 { font-size: 2rem; }
-    .options-grid { grid-template-columns: 1fr; }
-}
-
-.author-bio-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: inherit;
-    display: block;
-}
-
-/* Contenedor principal de la tarjeta de video */
-.glass-visual-card.video-card-container {
-    position: relative;
-    width: 100%;
-    min-height: 320px; /* Asegura un alto adecuado */
-    aspect-ratio: 16 / 9; /* Mantiene la proporción panorámica */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 0; /* Remueve relleno interno que pueda achicar el iframe */
-}
-
-/* Fuerza al iframe a ocupar todo el espacio de la tarjeta */
-.glass-visual-card.video-card-container iframe.yt-embed-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100% !important;
-    border: none;
-    border-radius: inherit;
-    object-fit: cover;
-}
-
-/* Ajuste del badge/tag flotante para que quede sobre el video */
-.glass-visual-card.video-card-container .floating-tag {
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-    z-index: 10;
-    pointer-events: none; /* Evita interferir con los clics del video */
-}
-
 /* ==========================================
-   ESTILOS PARA EL DESAFÍO INTERACTIVO (SLIDE 8)
+   SECCIÓN 1: EXPLORADOR (LABORATORIO GLASS)
    ========================================== */
-.full-slide {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.slide-game-card {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
+.interactive-lab {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
     padding: 2.5rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    margin-top: 1rem;
+    box-shadow: var(--shadow-glass);
+    margin-bottom: 4rem;
 }
 
-.game-header {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1.5rem;
-}
-
-.game-score-badge {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 0.5rem 1.2rem;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #e2e8f0;
-}
-
-.quiz-question {
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 2rem;
-    line-height: 1.5;
-}
-
-.options-grid {
+.lab-workspace {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-@media (max-width: 640px) {
-    .options-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.option-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    padding: 1rem 1.2rem;
-    color: #e2e8f0;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    text-align: center;
-}
-
-.option-btn:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-}
-
-.option-btn.correct {
-    background: rgba(34, 197, 94, 0.25) !important;
-    border-color: #22c55e !important;
-    color: #86efac !important;
-    font-weight: 700;
-}
-
-.option-btn.incorrect {
-    background: rgba(239, 68, 68, 0.25) !important;
-    border-color: #ef4444 !important;
-    color: #fca5a5 !important;
-}
-
-.feedback-msg {
-    min-height: 28px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-align: center;
-    margin-top: 1rem;
-}
-
-.feedback-success {
-    color: #86efac;
-}
-
-.feedback-error {
-    color: #fca5a5;
-}
-
-.game-actions {
-    display: flex;
-    justify-content: center;
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
     margin-top: 1.5rem;
 }
 
-.slide-btn {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    color: #ffffff;
-    border: none;
-    border-radius: 30px;
-    padding: 0.8rem 1.8rem;
+.lab-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.tab-btn {
+    background: rgba(8, 7, 12, 0.4);
+    border: 1px solid var(--glass-border);
+    color: var(--color-cream-muted);
+    padding: 1rem;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--font-body);
+}
+
+.tab-btn:hover, .tab-btn.active {
+    background: var(--glass-bg-hover);
+    color: var(--color-cream);
+    border-color: var(--glass-border-hover);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+    transform: translateX(5px);
+}
+
+.tab-num {
+    color: var(--color-purple);
+    font-weight: 700;
+}
+
+.lab-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    background: rgba(8, 7, 12, 0.5);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    align-items: center;
+}
+
+.display-media {
+    position: relative;
+    height: 250px;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.display-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.media-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(8, 7, 12, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border-hover);
+    color: var(--color-cream);
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+}
+
+.detail-box {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(253, 232, 208, 0.05);
+    border-left: 3px solid var(--color-purple);
+    border-radius: 8px;
+    color: var(--color-cream-muted);
+}
+
+.detail-box strong {
+    color: var(--color-cream);
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+/* ==========================================
+   SECCIÓN 2: MATRIZ DINÁMICA DE TARJETAS
+   ========================================== */
+.matrix-section {
+    margin-bottom: 4rem;
+}
+
+.matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.interactive-card {
+    position: relative;
+    height: 320px;
+    perspective: 1000px;
+}
+
+.card-front, .card-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+}
+
+.card-front {
+    background: var(--glass-bg);
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8,7,12,0.9), transparent);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.card-num {
+    color: var(--color-purple);
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.card-back {
+    background: var(--glass-bg-hover);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-color: var(--glass-border-hover);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transform: rotateY(180deg);
+}
+
+.interactive-card:hover .card-front {
+    transform: rotateY(-180deg);
+}
+
+.interactive-card:hover .card-back {
+    transform: rotateY(0deg);
+    box-shadow: var(--shadow-glow);
+}
+
+.card-category {
+    color: var(--color-purple);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.card-back p {
+    color: var(--color-cream-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   SECCIÓN 3: SIMULADOR / QUIZ GLASS
+   ========================================== */
+.quiz-section {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-glass);
+}
+
+.quiz-score-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    color: var(--color-cream);
+}
+
+.quiz-question-text {
+    font-size: 1.15rem;
+    color: var(--color-cream);
+    margin-bottom: 1.5rem;
+}
+
+.quiz-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.option-btn {
+    background: rgba(8, 7, 12, 0.5);
+    border: 1px solid var(--glass-border);
+    color: var(--color-cream-muted);
+    padding: 1rem 1.2rem;
+    border-radius: 14px;
+    text-align: left;
+    font-family: var(--font-body);
     font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.option-btn:hover {
+    background: var(--glass-bg-hover);
+    color: var(--color-cream);
+    border-color: var(--glass-border-hover);
+}
+
+.option-btn.correct {
+    background: rgba(34, 197, 94, 0.25);
+    border-color: #22c55e;
+    color: #fff;
+}
+
+.option-btn.wrong {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: #ef4444;
+    color: #fff;
+}
+
+.btn-primary {
+    margin-top: 1.5rem;
+    background: rgba(253, 232, 208, 0.12);
+    border: 1px solid var(--glass-border-hover);
+    color: var(--color-cream);
+    padding: 0.8rem 1.8rem;
+    border-radius: 20px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    transition: var(--transition);
 }
 
-.slide-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+.btn-primary:hover {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+    background: rgba(168, 85, 247, 0.25);
 }
 
-.hidden-btn {
-    display: none !important;
+.quiz-feedback {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+}
+
+.quiz-feedback.correct-bg {
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #86efac;
+}
+
+.quiz-feedback.wrong-bg {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+}
+
+.hidden { display: none !important; }
+
+@media (max-width: 768px) {
+    .lab-workspace, .lab-display, .quiz-options-grid {
+        grid-template-columns: 1fr;
+    }
 }
