@@ -1,0 +1,940 @@
+/* ==========================================
+   QUIÉNES SOMOS
+   Estilo Glassmorphism
+========================================== */
+
+
+/* ==========================================
+   FONDO
+========================================== */
+
+body {
+    background:
+        url('../assets/img/fonde.jpg')
+        no-repeat
+        center
+        center
+        fixed;
+
+    background-size: cover;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.about-header {
+    padding-bottom: 2rem;
+}
+
+
+/* ==========================================
+   INTRODUCCIÓN
+========================================== */
+
+.about-intro {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.about-intro-content {
+    position: relative;
+    padding: 3rem;
+    text-align: center;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-glass);
+
+    transition: var(--transition);
+}
+
+.about-intro-content:hover {
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-hover);
+
+    box-shadow: var(--shadow-glow);
+
+    transform: translateY(-5px);
+}
+
+
+/* ==========================================
+   ETIQUETAS
+========================================== */
+
+.intro-label,
+.section-heading > span,
+.about-end-content > span {
+    display: block;
+
+    margin-bottom: 0.8rem;
+
+    color: var(--color-purple);
+
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    letter-spacing: 0.2em;
+}
+
+
+/* ==========================================
+   TÍTULO INTRO
+========================================== */
+
+.about-intro-content h2 {
+    font-family: var(--font-heading);
+
+    color: var(--color-cream);
+
+    font-size: 2.6rem;
+    font-weight: 600;
+
+    margin-bottom: 1.2rem;
+
+    text-shadow:
+        0 0 15px rgba(253, 232, 208, 0.3);
+}
+
+
+/* ==========================================
+   TEXTO INTRO
+========================================== */
+
+.about-intro-content p {
+    max-width: 800px;
+
+    margin: 0 auto 1rem;
+
+    color: var(--color-cream-muted);
+
+    font-size: 0.98rem;
+    line-height: 1.8;
+}
+
+.about-intro-content p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ==========================================
+   SECCIÓN DEL EQUIPO
+========================================== */
+
+.about-section {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 1rem 2rem 5rem;
+}
+
+
+/* ==========================================
+   ENCABEZADO
+========================================== */
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-heading h2 {
+    font-family: var(--font-heading);
+
+    color: var(--color-cream);
+
+    font-size: 3rem;
+    font-weight: 600;
+
+    margin-bottom: 0.5rem;
+
+    text-shadow:
+        0 0 15px rgba(253, 232, 208, 0.3);
+}
+
+.section-heading p {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: var(--color-cream-muted);
+
+    font-size: 0.95rem;
+}
+
+
+/* ==========================================
+   GRID DE TARJETAS
+========================================== */
+
+.team-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(280px, 1fr));
+
+    gap: 2rem;
+}
+
+
+/* ==========================================
+   TARJETAS
+========================================== */
+
+.team-card {
+    position: relative;
+
+    overflow: hidden;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-glass);
+
+    /* IMPORTANTE:
+       Las tarjetas NO empiezan invisibles */
+    opacity: 1;
+
+    transform: translateY(0);
+
+    transition: var(--transition);
+}
+
+.team-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.team-card:hover {
+    background: var(--glass-bg-hover);
+
+    border-color: var(--glass-border-hover);
+
+    transform: translateY(-8px);
+
+    box-shadow: var(--shadow-glow);
+}
+
+
+/* ==========================================
+   IMAGEN
+========================================== */
+
+.team-image {
+    position: relative;
+
+    width: 100%;
+    height: 370px;
+
+    overflow: hidden;
+}
+
+.team-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: var(--transition);
+}
+
+.team-card:hover .team-image img {
+    transform: scale(1.06);
+}
+
+
+/* ==========================================
+   OVERLAY
+========================================== */
+
+.image-overlay {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 2rem 1.5rem 1.2rem;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(8, 7, 12, 0.85)
+        );
+
+    pointer-events: none;
+}
+
+.image-overlay span {
+    color: var(--color-cream);
+
+    font-size: 0.7rem;
+    font-weight: 600;
+
+    letter-spacing: 0.15em;
+}
+
+
+/* ==========================================
+   INFORMACIÓN
+========================================== */
+
+.team-info {
+    padding: 2rem;
+
+    text-align: center;
+}
+
+.team-number {
+    display: inline-block;
+
+    margin-bottom: 0.5rem;
+
+    color: var(--color-purple);
+
+    font-family: var(--font-heading);
+
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.team-info h2 {
+    font-family: var(--font-heading);
+
+    color: var(--color-cream);
+
+    font-size: 2rem;
+    font-weight: 600;
+
+    margin-bottom: 1rem;
+
+    text-shadow:
+        0 0 10px rgba(253, 232, 208, 0.3);
+}
+
+.team-info p {
+    color: var(--color-cream-muted);
+
+    font-size: 0.95rem;
+    line-height: 1.7;
+
+    margin-bottom: 1.5rem;
+}
+
+
+/* ==========================================
+   LÍNEA
+========================================== */
+
+.team-line {
+    width: 50px;
+    height: 2px;
+
+    margin: 0 auto 1.5rem;
+
+    background: var(--color-cream);
+
+    opacity: 0.6;
+
+    transition: var(--transition);
+}
+
+.team-card:hover .team-line {
+    width: 100px;
+}
+
+
+/* ==========================================
+   BOTÓN
+========================================== */
+
+.team-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 0.5rem;
+
+    color: var(--color-purple);
+
+    background: transparent;
+
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+
+    padding: 0.65rem 1.3rem;
+
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+}
+
+.team-button span {
+    transition: transform 0.3s ease;
+}
+
+.team-button:hover {
+    color: var(--color-cream);
+
+    background: rgba(253, 232, 208, 0.12);
+
+    border-color: var(--glass-border-hover);
+
+    box-shadow:
+        0 0 15px rgba(168, 85, 247, 0.3);
+}
+
+.team-button:hover span {
+    transform: translateX(5px);
+}
+
+
+/* ==========================================
+   ==========================================
+   NUEVA SECCIÓN:
+   RELACIÓN Y REFLEXIÓN
+   ==========================================
+========================================== */
+
+.relationship-section {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 1rem 2rem 6rem;
+}
+
+.relationship-heading {
+    max-width: 850px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-bottom: 3rem;
+}
+
+.relationship-heading h2 {
+    font-size: 2.8rem;
+}
+
+
+/* ==========================================
+   CONTENEDOR
+========================================== */
+
+.relationship-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(280px, 1fr));
+
+    gap: 2rem;
+}
+
+
+/* ==========================================
+   TARJETA DE REFLEXIÓN
+========================================== */
+
+.relationship-card {
+    position: relative;
+
+    padding: 2.5rem;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-glass);
+
+    transition: var(--transition);
+
+    overflow: hidden;
+}
+
+.relationship-card::before {
+    content: '';
+
+    position: absolute;
+
+    top: -100px;
+    right: -100px;
+
+    width: 220px;
+    height: 220px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(168, 85, 247, 0.18),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+.relationship-card:hover {
+    background: var(--glass-bg-hover);
+
+    border-color: var(--glass-border-hover);
+
+    transform: translateY(-8px);
+
+    box-shadow: var(--shadow-glow);
+}
+
+
+/* ==========================================
+   NÚMERO
+========================================== */
+
+.relationship-number {
+    position: absolute;
+
+    top: 1.5rem;
+    right: 1.8rem;
+
+    color: rgba(253, 232, 208, 0.15);
+
+    font-family: var(--font-heading);
+
+    font-size: 4rem;
+    font-style: italic;
+    font-weight: 600;
+
+    line-height: 1;
+}
+
+
+/* ==========================================
+   CONTENIDO
+========================================== */
+
+.relationship-content {
+    position: relative;
+
+    z-index: 1;
+}
+
+.relationship-label {
+    display: block;
+
+    margin-bottom: 0.7rem;
+
+    color: var(--color-purple);
+
+    font-size: 0.7rem;
+    font-weight: 600;
+
+    letter-spacing: 0.18em;
+}
+
+.relationship-content h3 {
+    font-family: var(--font-heading);
+
+    color: var(--color-cream);
+
+    font-size: 2.2rem;
+    font-weight: 600;
+
+    margin-bottom: 1.2rem;
+
+    text-shadow:
+        0 0 10px rgba(253, 232, 208, 0.3);
+}
+
+.relationship-content > p {
+    color: var(--color-cream-muted);
+
+    font-size: 0.95rem;
+    line-height: 1.8;
+
+    margin-bottom: 1rem;
+}
+
+
+/* ==========================================
+   CAJA DE REFLEXIÓN
+========================================== */
+
+.reflection-box {
+    margin-top: 1.8rem;
+
+    padding: 1.3rem 1.5rem;
+
+    background:
+        rgba(168, 85, 247, 0.08);
+
+    border-left:
+        2px solid
+        var(--color-purple);
+
+    border-radius:
+        0 12px 12px 0;
+}
+
+.reflection-box span {
+    display: block;
+
+    margin-bottom: 0.5rem;
+
+    color: var(--color-cream);
+
+    font-size: 0.7rem;
+    font-weight: 600;
+
+    letter-spacing: 0.15em;
+}
+
+.reflection-box p {
+    color: var(--color-cream-muted);
+
+    font-size: 0.9rem;
+    line-height: 1.7;
+
+    margin: 0;
+}
+
+
+/* ==========================================
+   SECCIÓN FINAL
+========================================== */
+
+.about-end {
+    padding: 5rem 2rem 6rem;
+
+    text-align: center;
+}
+
+.about-end-content {
+    max-width: 750px;
+
+    margin: 0 auto;
+
+    padding: 3rem 2rem;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-glass);
+}
+
+.about-end-content h2 {
+    font-family: var(--font-heading);
+
+    color: var(--color-cream);
+
+    font-size: 2.8rem;
+    font-weight: 600;
+
+    margin-bottom: 1rem;
+}
+
+.about-end-content p {
+    color: var(--color-cream-muted);
+
+    line-height: 1.7;
+
+    margin-bottom: 2rem;
+}
+
+
+/* ==========================================
+   BOTÓN VOLVER
+========================================== */
+
+.back-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    color: var(--color-purple);
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: var(--transition);
+}
+
+.back-button:hover {
+    color: var(--color-cream);
+
+    transform: translateX(-5px);
+
+    text-shadow:
+        0 0 8px var(--color-purple);
+}
+
+
+/* ==========================================
+   MODAL
+========================================== */
+
+.info-modal {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 2rem;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+
+    z-index: 2000;
+}
+
+.info-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+
+    width: min(500px, 100%);
+
+    padding: 2.5rem;
+
+    text-align: center;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-glow);
+
+    transform: scale(0.9);
+
+    transition: transform 0.3s ease;
+}
+
+.info-modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-number {
+    display: block;
+
+    margin-bottom: 0.5rem;
+
+    color: var(--color-purple);
+
+    font-family: var(--font-heading);
+
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+.modal-content h2 {
+    font-family: var(--font-heading);
+
+    color: var(--color-cream);
+
+    font-size: 2.2rem;
+
+    margin-bottom: 1rem;
+}
+
+.modal-content p {
+    color: var(--color-cream-muted);
+
+    line-height: 1.8;
+}
+
+
+/* ==========================================
+   BOTÓN CERRAR
+========================================== */
+
+.modal-close {
+    position: absolute;
+
+    top: 10px;
+    right: 15px;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--color-cream);
+
+    font-size: 2rem;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    color: var(--color-purple);
+
+    transform: rotate(90deg);
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .about-intro {
+        padding:
+            0 1.2rem 3rem;
+    }
+
+    .about-intro-content {
+        padding:
+            2rem 1.5rem;
+    }
+
+    .about-intro-content h2 {
+        font-size:
+            2.1rem;
+    }
+
+    .about-section {
+        padding:
+            1rem 1.2rem 4rem;
+    }
+
+    .section-heading h2 {
+        font-size:
+            2.4rem;
+    }
+
+    .team-container {
+        grid-template-columns:
+            1fr;
+    }
+
+    .team-image {
+        height:
+            320px;
+    }
+
+    .relationship-section {
+        padding:
+            1rem 1.2rem 4rem;
+    }
+
+    .relationship-container {
+        grid-template-columns:
+            1fr;
+    }
+
+    .relationship-heading h2 {
+        font-size:
+            2.3rem;
+    }
+
+    .relationship-card {
+        padding:
+            2rem;
+    }
+
+    .about-end {
+        padding:
+            3rem 1.2rem 4rem;
+    }
+
+    .about-end-content {
+        padding:
+            2.5rem 1.5rem;
+    }
+
+    .about-end-content h2 {
+        font-size:
+            2.2rem;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .team-image {
+        height:
+            270px;
+    }
+
+    .team-info {
+        padding:
+            1.5rem;
+    }
+
+    .team-info h2 {
+        font-size:
+            1.7rem;
+    }
+
+    .about-intro-content h2 {
+        font-size:
+            1.9rem;
+    }
+
+    .relationship-card {
+        padding:
+            1.5rem;
+    }
+
+    .relationship-content h3 {
+        font-size:
+            1.8rem;
+    }
+
+    .relationship-number {
+        font-size:
+            3rem;
+    }
+
+}

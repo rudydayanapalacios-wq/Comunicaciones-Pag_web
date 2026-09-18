@@ -1,73 +1,342 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Portal de Comunicación</title>
-    <!-- Google Fonts -->
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+         ===================================================== -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Estilos CSS -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         ESTILOS CSS
+         ===================================================== -->
+
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/responsive.css">
+
 </head>
+
+
 <body>
 
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
     <nav class="navbar">
-        <a href="index.html" class="logo">Comunicación.</a>
+
+        <a href="index.html" class="logo">
+            Comunicación.
+        </a>
+
         <ul class="nav-links">
-            <li><a href="index.html" class="active">Inicio</a></li>
-            <li><a href="tipos-comunicacion.html">Tipos</a></li>
-            <li><a href="funciones_lenguaje.html">Funciones</a></li>
-            <li><a href="comunicacion_noverbal.html">No Verbal</a></li>
-            <li><a href="autor.html">Autor</a></li>
+
+            <li>
+                <a href="#inicio" class="active">
+                    Inicio
+                </a>
+            </li>
+
+            <li>
+                <a href="tipos-comunicacion.html">
+                    Tipos
+                </a>
+            </li>
+
+            <li>
+                <a href="funciones_lenguaje.html">
+                    Funciones
+                </a>
+            </li>
+
+            <li>
+                <a href="comunicacion_noverbal.html">
+                    No Verbal
+                </a>
+            </li>
+
+          
+            <li>
+                <a href="evidencias.html">
+                    Evidencias
+                </a>
+            </li>
+             <li>
+                <a href="comunicacion-asertiva.html">
+                    Comunicación asertiva
+                </a>
+            </li>
+            <li>
+                <a href="quienes_somos.html">
+                    ¿Quiénes Somos?
+                </a>
+            </li>
+             <li>
+                <a href="reflexiones.html">
+                    Reflexiones
+                </a>
+            </li>
+
         </ul>
+
     </nav>
 
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+         ===================================================== -->
+
     <main>
-        <section class="page-header">
-            <h1>Explora el Arte de la Comunicación</h1>
-            <p class="subtitle">Guía interactiva sobre los fundamentos del lenguaje y la expresión.</p>
-        </section>
 
-        <div class="container">
-            <!-- Rejilla de Subpáginas -->
-            <div class="topics-grid">
-                
-                <a href="tipos-comunicacion.html" class="topic-card">
-                    <div>
-                        <h3>Tipos de Comunicación</h3>
-                        <p>Descubre las formas verbales, escritas y digitales de transmitir información.</p>
-                    </div>
-                    <span class="topic-btn">Explorar tema →</span>
-                </a>
 
-                <a href="funciones_lenguaje.html" class="topic-card">
-                    <div>
-                        <h3>Funciones del Lenguaje</h3>
-                        <p>Analiza la intención del emisor: expresiva, apelativa, poética y más.</p>
-                    </div>
-                    <span class="topic-btn">Explorar tema →</span>
-                </a>
+        <!-- =================================================
+             INTRODUCCIÓN / HERO
+             ================================================= -->
 
-                <a href="comunicacion_noverbal.html" class="topic-card">
-                    <div>
-                        <h3>Comunicación No Verbal</h3>
-                        <p>Aprende cómo los gestos, la postura y el tono construyen el mensaje.</p>
-                    </div>
-                    <span class="topic-btn">Explorar tema →</span>
+        <section class="hero" id="inicio">
+
+            <!-- Aura de luz detrás de la imagen -->
+            <div class="hero-glow hero-glow-purple"></div>
+            <div class="hero-glow hero-glow-blue"></div>
+
+
+            <!-- Contenido textual -->
+
+            <div class="hero-content">
+
+                <span class="hero-overline">
+                    PORTAL DE COMUNICACIÓN
+                </span>
+
+                <h1>
+                    Explora el
+                    <span>Arte de la Comunicación</span>
+                </h1>
+
+                <p>
+                    Descubre cómo las palabras, los gestos y las
+                    emociones nos permiten expresar ideas,
+                    transmitir mensajes y conectar con los demás.
+                </p>
+
+                <a href="#temas" class="hero-button">
+                    Explorar el portal
+                    <span>↓</span>
                 </a>
 
             </div>
-        </div>
+
+
+            <!-- Imagen de Hiprofe -->
+
+            <div class="hero-visual">
+
+                <div class="hero-ring hero-ring-one"></div>
+                <div class="hero-ring hero-ring-two"></div>
+
+                <div class="hero-image-glow"></div>
+
+                <img
+                    src="assets/img/holaprofe.png"
+                    alt="Hiprofe"
+                    class="hero-image"
+                >
+
+            </div>
+
+
+            <!-- Indicador inferior -->
+
+            <a href="#temas" class="scroll-indicator">
+
+                <span>
+                    Descubre más
+                </span>
+
+                <div class="scroll-line"></div>
+
+            </a>
+
+        </section>
+
+
+        <!-- =================================================
+             TEMAS
+             ================================================= -->
+
+        <section class="topics-section" id="temas">
+
+            <div class="page-header">
+
+                <span class="section-label">
+                    EXPLORA
+                </span>
+
+                <h2>
+                    Un mundo de comunicación
+                </h2>
+
+                <p class="subtitle">
+                    Guía interactiva sobre los fundamentos
+                    del lenguaje y la expresión.
+                </p>
+
+            </div>
+
+
+            <div class="container">
+
+                <!-- Rejilla de Subpáginas -->
+
+                <div class="topics-grid">
+
+
+                    <!-- Tipos de comunicación -->
+
+                    <a
+                        href="tipos-comunicacion.html"
+                        class="topic-card"
+                    >
+
+                        <div>
+
+                            <span class="card-number">
+                                01
+                            </span>
+
+                            <h3>
+                                Tipos de Comunicación
+                            </h3>
+
+                            <p>
+                                Descubre las formas verbales,
+                                escritas y digitales de transmitir
+                                información.
+                            </p>
+
+                        </div>
+
+                        <span class="topic-btn">
+                            Explorar tema →
+                        </span>
+
+                    </a>
+
+
+                    <!-- Funciones del lenguaje -->
+
+                    <a
+                        href="funciones_lenguaje.html"
+                        class="topic-card"
+                    >
+
+                        <div>
+
+                            <span class="card-number">
+                                02
+                            </span>
+
+                            <h3>
+                                Funciones del Lenguaje
+                            </h3>
+
+                            <p>
+                                Analiza la intención del emisor:
+                                expresiva, apelativa, poética
+                                y más.
+                            </p>
+
+                        </div>
+
+                        <span class="topic-btn">
+                            Explorar tema →
+                        </span>
+
+                    </a>
+
+
+                    <!-- Comunicación no verbal -->
+
+                    <a
+                        href="comunicacion_noverbal.html"
+                        class="topic-card"
+                    >
+
+                        <div>
+
+                            <span class="card-number">
+                                03
+                            </span>
+
+                            <h3>
+                                Comunicación No Verbal
+                            </h3>
+
+                            <p>
+                                Aprende cómo los gestos, la postura
+                                y el tono construyen el mensaje.
+                            </p>
+
+                        </div>
+
+                        <span class="topic-btn">
+                            Explorar tema →
+                        </span>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
     </main>
 
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
     <footer>
-        <p>&copy; 2026 Portal de Comunicación. Todos los derechos reservados.</p>
+
+        <p>
+            &copy; 2026 Portal de Comunicación.
+            Todos los derechos reservados.
+        </p>
+
     </footer>
 
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script src="js/index.js"></script>
+
 </body>
+
 </html>

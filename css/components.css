@@ -2,8 +2,8 @@
 
 /* FONDO GENERAL */
 body {
-    background: linear-gradient(180deg, rgba(8, 7, 14, 0.82) 0%, rgba(5, 4, 9, 0.94) 100%), 
-                url('../assets/img/fondo.jpg') center/cover no-repeat fixed !important;
+    background: linear-gradient(180deg, rgba(60, 53, 67, 0.82) 0%, rgba(5, 4, 9, 0.94) 100%), 
+                url('../assets/img/fonde.jpg') center/cover no-repeat fixed !important;
 }
 
 /* ENCABEZADOS DE SECCIÓN */

@@ -1,0 +1,776 @@
+/* ==========================================
+   REFLEXIONES
+   Estilo Glassmorphism
+========================================== */
+
+
+/* ==========================================
+   FONDO
+========================================== */
+
+body {
+    background:
+        url('../assets/img/fonde.jpg')
+        no-repeat
+        center
+        center
+        fixed;
+
+    background-size: cover;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.reflection-header {
+    padding-bottom: 2rem;
+}
+
+.reflection-kicker {
+    display: block;
+
+    margin-bottom: 0.8rem;
+
+    color: var(--color-purple);
+
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    letter-spacing: 0.2em;
+}
+
+
+/* ==========================================
+   INTRODUCCIÓN
+========================================== */
+
+.reflection-intro {
+    max-width: 750px;
+
+    margin: 0 auto;
+
+    padding: 0 2rem 5rem;
+
+    text-align: center;
+}
+
+.intro-symbol {
+    color: var(--color-purple);
+
+    font-size: 2rem;
+
+    margin-bottom: 1rem;
+
+    animation:
+        symbolFloat 3s infinite ease-in-out;
+}
+
+@keyframes symbolFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+
+}
+
+.reflection-intro p {
+    color: var(--color-cream-muted);
+
+    font-size: 1.05rem;
+
+    line-height: 1.9;
+
+    margin-bottom: 1.5rem;
+}
+
+.intro-line {
+    width: 60px;
+
+    height: 1px;
+
+    margin: 0 auto 1rem;
+
+    background: var(--color-cream);
+
+    opacity: 0.5;
+}
+
+.reflection-intro span {
+    color: var(--color-purple);
+
+    font-size: 0.7rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.18em;
+}
+
+
+/* ==========================================
+   SECCIÓN DE REFLEXIONES
+========================================== */
+
+.reflections-section {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 0 2rem 5rem;
+}
+
+.reflection-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(280px, 1fr));
+
+    gap: 2rem;
+}
+
+
+/* ==========================================
+   TARJETA
+========================================== */
+
+.reflection-card {
+    position: relative;
+
+    overflow: hidden;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid var(--glass-border);
+
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-glass);
+
+    transition: var(--transition);
+}
+
+.reflection-card::before {
+    content: '';
+
+    position: absolute;
+
+    top: -100px;
+    right: -100px;
+
+    width: 250px;
+    height: 250px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(168, 85, 247, 0.18),
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+    transition: var(--transition);
+}
+
+.reflection-card:hover {
+    background: var(--glass-bg-hover);
+
+    border-color: var(--glass-border-hover);
+
+    transform: translateY(-8px);
+
+    box-shadow: var(--shadow-glow);
+}
+
+.reflection-card:hover::before {
+    transform: scale(1.2);
+}
+
+
+/* ==========================================
+   PARTE SUPERIOR
+========================================== */
+
+.card-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 1.8rem 2rem 0;
+}
+
+.card-number {
+    color: rgba(253, 232, 208, 0.2);
+
+    font-family: var(--font-heading);
+
+    font-size: 3.5rem;
+
+    font-style: italic;
+
+    line-height: 1;
+}
+
+.card-label {
+    color: var(--color-purple);
+
+    font-size: 0.65rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.15em;
+}
+
+
+/* ==========================================
+   CONTENIDO
+========================================== */
+
+.card-content {
+    padding: 1rem 2rem 2rem;
+}
+
+.card-content h2 {
+    position: relative;
+
+    z-index: 1;
+
+    font-family: var(--font-heading);
+
+    color: var(--color-cream);
+
+    font-size: 2.2rem;
+
+    font-weight: 600;
+
+    margin-bottom: 1.5rem;
+
+    text-shadow:
+        0 0 10px rgba(253, 232, 208, 0.3);
+}
+
+
+/* ==========================================
+   COMILLAS
+========================================== */
+
+.quote-mark {
+    position: absolute;
+
+    top: 5rem;
+    left: 1.3rem;
+
+    color: rgba(168, 85, 247, 0.15);
+
+    font-family: Georgia, serif;
+
+    font-size: 8rem;
+
+    line-height: 1;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   TEXTO
+========================================== */
+
+.reflection-text {
+    position: relative;
+
+    z-index: 1;
+
+    color: var(--color-cream-muted);
+
+    font-size: 0.95rem;
+
+    line-height: 1.85;
+
+    margin-bottom: 1rem;
+}
+
+
+/* ==========================================
+   PIE DE TARJETA
+========================================== */
+
+.card-footer {
+    padding: 0 2rem 2rem;
+}
+
+.expand-button {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0.8rem 1rem;
+
+    color: var(--color-purple);
+
+    background: rgba(253, 232, 208, 0.04);
+
+    border: 1px solid var(--glass-border);
+
+    border-radius: 12px;
+
+    font-family: var(--font-body);
+
+    font-size: 0.85rem;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+}
+
+.expand-button b {
+    font-size: 1.3rem;
+
+    font-weight: 400;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.expand-button:hover {
+    color: var(--color-cream);
+
+    background: rgba(253, 232, 208, 0.1);
+
+    border-color: var(--glass-border-hover);
+}
+
+.expand-button.open b {
+    transform: rotate(45deg);
+}
+
+
+/* ==========================================
+   BARRA DE PROGRESO
+========================================== */
+
+.progress-track {
+    width: 100%;
+
+    height: 2px;
+
+    margin-top: 1rem;
+
+    background: rgba(253, 232, 208, 0.08);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0;
+
+    height: 100%;
+
+    background: var(--color-purple);
+
+    transition:
+        width 0.8s ease;
+}
+
+.reflection-card.read .progress-bar {
+    width: 100%;
+}
+
+
+/* ==========================================
+   APRENDIZAJE COMPARTIDO
+========================================== */
+
+.shared-learning {
+    padding: 1rem 2rem 5rem;
+
+    text-align: center;
+}
+
+.shared-card {
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    padding: 3.5rem 3rem;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid var(--glass-border);
+
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-glass);
+
+    transition: var(--transition);
+}
+
+.shared-card:hover {
+    background: var(--glass-bg-hover);
+
+    border-color: var(--glass-border-hover);
+
+    box-shadow: var(--shadow-glow);
+}
+
+.shared-icon {
+    color: var(--color-purple);
+
+    font-size: 1.7rem;
+
+    margin-bottom: 1rem;
+
+    animation:
+        symbolFloat 3s infinite ease-in-out;
+}
+
+.shared-card > span {
+    display: block;
+
+    margin-bottom: 0.8rem;
+
+    color: var(--color-purple);
+
+    font-size: 0.7rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.2em;
+}
+
+.shared-card h2 {
+    font-family: var(--font-heading);
+
+    color: var(--color-cream);
+
+    font-size: 3rem;
+
+    font-weight: 600;
+
+    margin-bottom: 1rem;
+
+    text-shadow:
+        0 0 15px rgba(253, 232, 208, 0.3);
+}
+
+.shared-card p {
+    max-width: 650px;
+
+    margin: 0 auto 2rem;
+
+    color: var(--color-cream-muted);
+
+    line-height: 1.8;
+}
+
+
+/* ==========================================
+   BOTÓN FINAL
+========================================== */
+
+.final-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 0.7rem;
+
+    padding: 0.8rem 1.4rem;
+
+    color: var(--color-purple);
+
+    background: transparent;
+
+    border: 1px solid var(--glass-border);
+
+    border-radius: 20px;
+
+    font-family: var(--font-body);
+
+    font-size: 0.9rem;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+}
+
+.final-button span {
+    transition:
+        transform 0.3s ease;
+}
+
+.final-button:hover {
+    color: var(--color-cream);
+
+    background: rgba(253, 232, 208, 0.1);
+
+    border-color: var(--glass-border-hover);
+
+    box-shadow:
+        0 0 15px rgba(168, 85, 247, 0.3);
+}
+
+.final-button:hover span {
+    transform: translateX(6px);
+}
+
+
+/* ==========================================
+   FINAL
+========================================== */
+
+.reflection-end {
+    text-align: center;
+
+    padding: 0 2rem 5rem;
+}
+
+.back-button {
+    display: inline-flex;
+
+    color: var(--color-purple);
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: var(--transition);
+}
+
+.back-button:hover {
+    color: var(--color-cream);
+
+    transform: translateX(-5px);
+
+    text-shadow:
+        0 0 8px var(--color-purple);
+}
+
+
+/* ==========================================
+   MODAL FINAL
+========================================== */
+
+.final-modal {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 2rem;
+
+    background: rgba(0, 0, 0, 0.78);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+
+    z-index: 2000;
+}
+
+.final-modal.active {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.final-modal-content {
+    position: relative;
+
+    width: min(650px, 100%);
+
+    padding: 3rem;
+
+    text-align: center;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid var(--glass-border);
+
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-glow);
+
+    transform: scale(0.9);
+
+    transition:
+        transform 0.3s ease;
+}
+
+.final-modal.active .final-modal-content {
+    transform: scale(1);
+}
+
+.final-modal-content > span {
+    display: block;
+
+    margin-bottom: 0.8rem;
+
+    color: var(--color-purple);
+
+    font-size: 0.7rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.2em;
+}
+
+.final-modal-content h2 {
+    font-family: var(--font-heading);
+
+    color: var(--color-cream);
+
+    font-size: 2.7rem;
+
+    margin-bottom: 1rem;
+}
+
+.final-modal-content p {
+    color: var(--color-cream-muted);
+
+    line-height: 1.8;
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 10px;
+    right: 15px;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--color-cream);
+
+    font-size: 2rem;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    color: var(--color-purple);
+
+    transform: rotate(90deg);
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .reflection-intro {
+        padding:
+            0 1.2rem 4rem;
+    }
+
+    .reflections-section {
+        padding:
+            0 1.2rem 4rem;
+    }
+
+    .reflection-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .shared-learning {
+        padding:
+            1rem 1.2rem 4rem;
+    }
+
+    .shared-card {
+        padding:
+            2.5rem 1.5rem;
+    }
+
+    .shared-card h2 {
+        font-size:
+            2.3rem;
+    }
+
+    .final-modal-content {
+        padding:
+            2.5rem 1.5rem;
+    }
+
+    .final-modal-content h2 {
+        font-size:
+            2.2rem;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .card-top {
+        padding:
+            1.5rem 1.3rem 0;
+    }
+
+    .card-content {
+        padding:
+            0.8rem 1.3rem 1.5rem;
+    }
+
+    .card-footer {
+        padding:
+            0 1.3rem 1.5rem;
+    }
+
+    .card-content h2 {
+        font-size:
+            1.9rem;
+    }
+
+    .card-number {
+        font-size:
+            2.8rem;
+    }
+
+    .shared-card h2 {
+        font-size:
+            2rem;
+    }
+
+}
