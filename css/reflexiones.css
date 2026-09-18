@@ -25,6 +25,7 @@ body {
 ========================================== */
 
 .reflection-header {
+    padding-top: 180px;
     padding-bottom: 2rem;
 }
 
@@ -698,6 +699,11 @@ body {
 
 @media (max-width: 768px) {
 
+    .reflection-header {
+        padding-top: 190px;
+        padding-bottom: 2rem;
+    }
+
     .reflection-intro {
         padding:
             0 1.2rem 4rem;
@@ -742,6 +748,11 @@ body {
 
 
 @media (max-width: 480px) {
+
+    .reflection-header {
+        padding-top: 210px;
+        padding-bottom: 2rem;
+    }
 
     .card-top {
         padding:
